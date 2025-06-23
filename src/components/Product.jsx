@@ -1,9 +1,10 @@
 import { Card, Button } from 'react-bootstrap';
 import callApi from '../utils/api';
+import endpoint from '../utils/endpoint';
 import '../assets/Product.scss';
 
 const updatedProduct = async (id) => {
-  const data = await callApi('PUT', `https://fakestoreapi.com/products/${id}`, {
+  const data = await callApi('PUT', `${endpoint}${id}`, {
     title: "Produit mis à jour",
     price: 49.99,
     description: "Description mise à jour",
@@ -16,14 +17,14 @@ const updatedProduct = async (id) => {
 };
 
 const patchedProduct = async (id) => {
-  const data = await callApi('PATCH', `https://fakestoreapi.com/products/${id}`, {
+  const data = await callApi('PATCH', `${endpoint}${id}`, {
     price: 5,
   });
   alert(`Le prix du produit avec l'id ${data.id} a été modifié`);
 };
 
 const deleteProduct = async (id) => {
-  const data = await callApi('DELETE', `https://fakestoreapi.com/products/${id}`);
+  const data = await callApi('DELETE', `${endpoint}${id}`);
   alert(`Le produit avec l'id ${id} a été supprimé`);
 };
 

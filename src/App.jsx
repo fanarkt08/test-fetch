@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Product from './components/Product';
 import callApi from './utils/api';
+import endpoint from './utils/endpoint';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const newProduct = async () => {
-    const data = await callApi('POST', 'https://fakestoreapi.com/products', {
+    const data = await callApi('POST', endpoint, {
       title: "Nouveau produit",
       price: 29.99,
       description: "Un super produit ajouté via API",
@@ -35,10 +36,10 @@ function App() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch(`https://fakestoreapi.com/products`);
+        const response = await fetch(endpoint);
 
         if (!response.ok) {
-          const message = `Erreur HTTP pour GET https://fakestoreapi.com/products. Détail : ${response.statusText ? response.statusText + ' - ' : ''}${response.status}`;
+          const message = `Erreur HTTP pour GET ${endpoint}. Détail : ${response.statusText ? response.statusText + ' - ' : ''}${response.status}`;
           throw new Error(message);
         }
 
