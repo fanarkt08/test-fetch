@@ -57,11 +57,12 @@ function App() {
     fetchProducts();
   }, []);
 
+  if (error) return <p className="text-danger">Erreur : {error}</p>;
+
   if (loading) return <p className="text-center mt-5">Chargement des produits...</p>;
 
   return (
     <Container className="my-4 d-flex flex-column">
-      {error && <p className="text-danger">Erreur : {error}</p>}
       <Button onClick={newProduct} className="mb-3">
         Ajouter un produit
       </Button>
