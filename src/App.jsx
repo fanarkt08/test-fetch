@@ -16,17 +16,36 @@ const newProduct = async () => {
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch(`https://fakestoreapi.com/products`);
-      const data = await response.json();
-      setProducts(data);
+      try {
+        const response = await fetch(`https://fakestoreapi.com/products`);
+
+        if (!response.ok) {
+          const message = `Erreur HTTP pour GET https://fakestoreapi.com/products. Détail : ${response.statusText ? response.statusText + ' - ' : ''}${response.status}`;
+          throw new Error(message);
+        }
+
+        const data = await response.json();
+        setProducts(data);
+
+      } catch (err) {
+        setError(err.message);
+        console.error(err.message); 
+        
+      } finally {
+        setLoading(false);
+      }
     }
     fetchProducts();
   }, []);
 
   return (
     <Container className="my-4 d-flex flex-column">
+      {(error) ? `<p>Erreur : ${error}</p>` : (loading) ? "<p>Chargement...</p>" : null}
       <Button onClick={newProduct} className="mb-3">
         Ajouter un produit
       </Button>
