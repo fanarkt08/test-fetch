@@ -15,9 +15,7 @@ const newProduct = async () => {
 };
 
 function App() {
-
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     async function fetchProducts() {
       const response = await fetch(`https://fakestoreapi.com/products`);
@@ -29,11 +27,9 @@ function App() {
 
   return (
     <Container className="my-4 d-flex flex-column">
-
       <Button onClick={newProduct} className="mb-3">
         Ajouter un produit
       </Button>
-
       <Row className="gx-1 gy-1">
         {products.map(product => (
           <Col key={product.id} sm={6} md={4} lg={3} className="my-2">
@@ -41,7 +37,6 @@ function App() {
           </Col>
         ))}
       </Row>
-
     </Container>
   );
 }
