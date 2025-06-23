@@ -1,5 +1,5 @@
 import { Card } from 'react-bootstrap';
-import '../assets/Product.sass'; // Assure-toi que le chemin est bon
+import '../assets/Product.sass';
 
 function Product({ product }) {
   return (
