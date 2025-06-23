@@ -10,14 +10,14 @@ function Product({ product }) {
         alt={product.title}
       />
       <Card.Body>
-        <Card.Title>{
-            product.title}
+        <Card.Title>
+          {product.title}
         </Card.Title>
         <Card.Text>
-            {product.description}
+          {product.description}
         </Card.Text>
         <Card.Text>
-            {product.price} €
+          {product.price} €
         </Card.Text>
       </Card.Body>
     </Card>
