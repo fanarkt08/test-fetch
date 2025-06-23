@@ -15,19 +15,6 @@ const newProduct = async () => {
     alert(`Le produit avec l'id ${data.id} a été créé`);
 };
 
-const errorMessage = (message) => {
-  if (message.includes('Failed to fetch')) {
-    return "Impossible de contacter le serveur. Vérifiez votre connexion Internet.";
-  }
-  if (message.includes('404')) {
-    return "Données introuvables.";
-  }
-  if (message.includes('500')) {
-    return "Erreur du serveur. Réessayez plus tard.";
-  }
-  return "Une erreur est survenue. Veuillez réessayer.";
-}
-
 function App() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -47,7 +34,7 @@ function App() {
         setProducts(data);
 
       } catch (err) {
-        setError(errorMessage(err.message));
+        setError(`Une erreur est survenue lors de votre requête.`);
         console.error(err.message); 
 
       } finally {
