@@ -10,7 +10,9 @@ const updatedProduct = async (id) => {
     image: "https://via.placeholder.com/150",
     category: "electronics"
   });
-  alert(`Le produit avec l'id ${id} a été modifié`);
+  if (data) {
+    alert(`Le produit avec l'id ${id} a été modifié`);
+  }
 };
 
 const patchedProduct = async (id) => {

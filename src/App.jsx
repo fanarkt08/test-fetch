@@ -14,6 +14,19 @@ const newProduct = async () => {
     alert(`Le produit avec l'id ${data.id} a été créé`);
 };
 
+const errorMessage = (message) => {
+  if (message.includes('Failed to fetch')) {
+    return "Impossible de contacter le serveur. Vérifiez votre connexion Internet.";
+  }
+  if (message.includes('404')) {
+    return "Données introuvables.";
+  }
+  if (message.includes('500')) {
+    return "Erreur du serveur. Réessayez plus tard.";
+  }
+  return "Une erreur est survenue. Veuillez réessayer.";
+}
+
 function App() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -33,9 +46,9 @@ function App() {
         setProducts(data);
 
       } catch (err) {
-        setError(err.message);
+        setError(errorMessage(err.message));
         console.error(err.message); 
-        
+
       } finally {
         setLoading(false);
       }
@@ -43,9 +56,11 @@ function App() {
     fetchProducts();
   }, []);
 
+  if (loading) return <p className="text-center mt-5">Chargement des produits...</p>;
+
   return (
     <Container className="my-4 d-flex flex-column">
-      {(error) ? `<p>Erreur : ${error}</p>` : (loading) ? "<p>Chargement...</p>" : null}
+      {error && <p className="text-danger">Erreur : {error}</p>}
       <Button onClick={newProduct} className="mb-3">
         Ajouter un produit
       </Button>
