@@ -34,7 +34,7 @@ async function callApi(method, endpoint, data = null) {
 
   } catch (error) {
     console.error(error.message);
-    alert(`${method} ${endpoint} échoué pour l'objet : ${data ? JSON.stringify(data) : 'aucune donnée'}`);
+    alert("La requête a échouée.");
   }
 }
 
